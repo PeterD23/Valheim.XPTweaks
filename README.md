@@ -2,7 +2,7 @@
 A mod for Valheim that does two things:
 
 # Fishing Catch XP
-Reduces struggling stamina cost of fish by 33%, as well as award XP if a fish is caught (reeled in fully)
+Award XP if a fish is caught (reeled in fully)
 
 If a fish is caught, the catch notification will now append the XP gain in brackets e.g "Perch Caught (1 XP)"
 

@@ -12,7 +12,7 @@ namespace XPTweaks
     [BepInProcess("valheim.exe")]
     public class XPTweaks : BaseUnityPlugin
     {
-        private readonly Harmony harmony = new Harmony("FishingCatchXP");
+        private readonly Harmony harmony = new Harmony("XPTweaks");
         private static ManualLogSource Logs;
 
         public static HashSet<Character> NoOfTargetsHit = new HashSet<Character>();
@@ -54,7 +54,7 @@ namespace XPTweaks
         [HarmonyPatch(typeof(Player))]
         class Raise_Skill_Based_on_Targets
         {
-            private readonly static int[] _applicableSkills = { 1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 14 };
+            private readonly static int[] _applicableSkills = { 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 14 };
 
             [HarmonyPatch(nameof(Player.RaiseSkill))]
             [HarmonyPrefix]
@@ -62,6 +62,7 @@ namespace XPTweaks
             {
                 if (_applicableSkills.Contains((int) skill))
                 {
+                    Logs.LogInfo($"NoOfTargetsHit is {NoOfTargetsHit.Count}");
                     var bonusXp = Mathf.Max(0, (value / 2) * (NoOfTargetsHit.Count - 1));
                     Logs.LogInfo($"Adding XP: {value} + {bonusXp}");
                     value += bonusXp;
